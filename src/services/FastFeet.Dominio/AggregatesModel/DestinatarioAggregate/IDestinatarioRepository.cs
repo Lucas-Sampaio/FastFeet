@@ -6,6 +6,6 @@ namespace FastFeet.Dominio.AggregatesModel.DestinatarioAggregate
     public interface IDestinatarioRepository : IRepository<Destinatario>
     {
         Destinatario Cadastrar(Destinatario destinatario);
-        void Update(Destinatario destinatario);
+        void Atualizar(Destinatario destinatario);
     }
 }
