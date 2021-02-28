@@ -1,5 +1,6 @@
 ﻿using FastFeet.WebApi.Core.Comunication;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
@@ -13,11 +14,20 @@ namespace FastFeet.WebApi.Core.Controller
 
         protected ICollection<string> Erros = new List<string>();
 
-        protected ActionResult CustomResponse(object result = null)
+        protected ActionResult CustomResponse(object result = null, int statusCodes = 0)
         {
             if (OperacaoValida())
             {
-                return Ok(result);
+                switch (statusCodes)
+                {
+                    case StatusCodes.Status201Created:
+                        return Created("","Criado com sucesso");
+                    case StatusCodes.Status204NoContent:
+                        return NoContent();
+                    default:
+                        return Ok(result);
+                }
+               
             }
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
