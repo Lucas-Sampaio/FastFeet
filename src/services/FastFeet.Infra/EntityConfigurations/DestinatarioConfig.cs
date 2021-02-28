@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FastFeet.Infra.EntityConfigurations
 {
-    class DestinatarioConfig : IEntityTypeConfiguration<Destinatario>
+    public class DestinatarioConfig : IEntityTypeConfiguration<Destinatario>
     {
         public void Configure(EntityTypeBuilder<Destinatario> builder)
         {
@@ -23,6 +23,7 @@ namespace FastFeet.Infra.EntityConfigurations
                 e.Property(x => x.Numero).IsUnicode();
                 e.Property(x => x.Cep);
             });
+
         }
     }
 }

@@ -20,7 +20,7 @@ namespace FastFeet.Infra.Repositories
             return entidade;
         }
 
-        public void Update(Destinatario destinatario)
+        public void Atualizar(Destinatario destinatario)
         {
             _context.Update(destinatario);
         }
