@@ -1,4 +1,5 @@
-﻿using FastFeet.API.Messages;
+﻿using AutoMapper;
+using FastFeet.API.Messages;
 using FastFeet.Dominio.AggregatesModel.DestinatarioAggregate;
 using FluentValidation.Results;
 using MediatR;
@@ -12,10 +13,11 @@ namespace FastFeet.API.Application.Commands.DestinatarioCommands
         IRequestHandler<AtualizarDestinatarioCommand, ValidationResult>
     {
         private readonly IDestinatarioRepository _destinatarioRepository;
-
-        public DestinatarioCommandHandler(IDestinatarioRepository destinatarioRepository)
+        private readonly IMapper _mapper;
+        public DestinatarioCommandHandler(IDestinatarioRepository destinatarioRepository, IMapper mapper)
         {
             _destinatarioRepository = destinatarioRepository;
+            _mapper = mapper;
         }
 
         public async Task<ValidationResult> Handle(CadastrarDestinatarioCommand request, CancellationToken cancellationToken)
@@ -23,7 +25,7 @@ namespace FastFeet.API.Application.Commands.DestinatarioCommands
             // Validação do comando
             if (!request.EhValido()) return request.ValidationResult;
 
-            var destinatario = MapearDestinatario(request);
+            var destinatario = _mapper.Map<Destinatario>(request);
             _destinatarioRepository.Cadastrar(destinatario);
             var sucesso = await PersistirDados(_destinatarioRepository.UnitOfWork);
             return sucesso;
@@ -34,7 +36,7 @@ namespace FastFeet.API.Application.Commands.DestinatarioCommands
             // Validação do comando
             if (!request.EhValido()) return request.ValidationResult;
 
-            var destinatario = MapearDestinatario(request);
+            var destinatario = _mapper.Map<Destinatario>(request);
             _destinatarioRepository.Atualizar(destinatario);
             var sucesso = await PersistirDados(_destinatarioRepository.UnitOfWork);
             return sucesso;
