@@ -1,6 +1,8 @@
-﻿namespace FastFeet.Dominio.SeedWork
+﻿using System;
+
+namespace FastFeet.Dominio.SeedWork
 {
-    public interface IRepository<T> where T : IAggregateRoot
+    public interface IRepository<T> : IDisposable where T : IAggregateRoot
     {
         IUnitOfWork UnitOfWork { get; }
     }
