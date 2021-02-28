@@ -8,8 +8,9 @@ namespace FastFeet.Dominio.AggregatesModel.DestinatarioAggregate
         {
 
         }
-        public Destinatario(string nome, Endereco endereco)
+        public Destinatario(string nome, Endereco endereco,int id = 0)
         {
+            Id = id;
             Nome = nome;
             Endereco = endereco;
         }

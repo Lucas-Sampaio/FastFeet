@@ -5,6 +5,10 @@ namespace FastFeet.Dominio.AggregatesModel.DestinatarioAggregate
 {
     public class Endereco : ValueObject
     {
+        public Endereco()
+        {
+
+        }
         public Endereco(string logradouro, string numero, string complemento, string cep, string cidade, string estado)
         {
             Logradouro = logradouro;
