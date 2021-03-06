@@ -35,41 +35,11 @@ namespace FastFeet.API.Application.Commands.DestinatarioCommands
         {
             // Validação do comando
             if (!request.EhValido()) return request.ValidationResult;
-
+            
             var destinatario = _mapper.Map<Destinatario>(request);
             _destinatarioRepository.Atualizar(destinatario);
             var sucesso = await PersistirDados(_destinatarioRepository.UnitOfWork);
             return sucesso;
-        }
-
-        //TODO: refatorar depois
-        private Destinatario MapearDestinatario(CadastrarDestinatarioCommand request)
-        {
-            var endereco = new Endereco
-            {
-                Logradouro = request.Endereco.Logradouro,
-                Numero = request.Endereco.Numero,
-                Complemento = request.Endereco.Complemento,
-                Cep = request.Endereco.Cep,
-                Cidade = request.Endereco.Cidade,
-                Estado = request.Endereco.Estado
-            };
-            var destinatario = new Destinatario(request.Nome, endereco);
-            return destinatario;
-        }
-        private Destinatario MapearDestinatario(AtualizarDestinatarioCommand request)
-        {
-            var endereco = new Endereco
-            {
-                Logradouro = request.Endereco.Logradouro,
-                Numero = request.Endereco.Numero,
-                Complemento = request.Endereco.Complemento,
-                Cep = request.Endereco.Cep,
-                Cidade = request.Endereco.Cidade,
-                Estado = request.Endereco.Estado
-            };
-            var destinatario = new Destinatario(request.Nome, endereco,request.Id);
-            return destinatario;
-        }
+        }       
     }
 }

@@ -17,9 +17,6 @@ namespace FastFeet.API.Configuration
 
             services.AddDbContext<FastFeetContext>(options => options.UseSqlServer(connection));
 
-            //services.AddDbContext<FastFeetContext>(options => options.UseSqlServer(connection, x => x.MigrationsAssembly(
-            //    typeof(FastFeetContext).Assembly.FullName)));
-
             services.AddControllers();
 
             services.AddCors(options =>
