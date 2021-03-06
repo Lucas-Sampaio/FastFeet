@@ -4,7 +4,7 @@ using System;
 
 namespace FastFeet.API.Messages
 {
-    public class Command : Message, IRequest<ValidationResult>
+    public abstract class Command : Message, IRequest<ValidationResult>
     {
         public DateTime Timestamp { get; set; }
         public ValidationResult ValidationResult { get; set; }
@@ -12,9 +12,7 @@ namespace FastFeet.API.Messages
         {
             Timestamp = DateTime.Now;
         }
-        public virtual bool EhValido()
-        {
-            throw new NotImplementedException();
-        }
+        public abstract bool EhValido();
+       
     }
 }
