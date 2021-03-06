@@ -8,7 +8,7 @@ namespace FastFeet.Infra.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Destinatario> builder)
         {
-            builder.ToTable("recipients");
+            builder.ToTable("Destinatarios");
 
             builder.HasKey(c => c.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd().IsRequired();
