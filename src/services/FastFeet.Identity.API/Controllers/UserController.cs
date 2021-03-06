@@ -1,4 +1,5 @@
-﻿using FastFeet.Identity.API.Models;
+﻿using FastFeet.Identity.API.Entity;
+using FastFeet.Identity.API.Models;
 using FastFeet.Identity.API.Services;
 using FastFeet.WebApi.Core.Controller;
 using Microsoft.AspNetCore.Identity;
@@ -21,7 +22,7 @@ namespace FastFeet.Identity.API.Controllers
         public async Task<IActionResult> Registrar(UsuarioRegistroVM viewModel)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
-            var user = new IdentityUser
+            var user = new User
             {
                 UserName = viewModel.Email,
                 Email = viewModel.Email,

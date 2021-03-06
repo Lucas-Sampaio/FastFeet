@@ -1,4 +1,5 @@
 using FastFeet.Identity.API.Configuration;
+using FastFeet.Identity.API.Entity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -56,13 +57,15 @@ namespace FastFeet.Identity.API
         }
         private async Task CreateUserAdmin(IServiceProvider serviceProvider)
         {
-            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
             var user = await userManager.FindByEmailAsync("admin@fastfeet.com");
             if (user == null)
             {
-                user = new IdentityUser("admin@fastfeet.com")
+                user = new User("admin@fastfeet.com")
                 {
-
+                    CreatedAt = DateTime.Now,
+                    UpdateAt = DateTime.Now,
+                    Nome = "Distribuidora FastFeet",
                     Email = "admin@fastfeet.com",
                     EmailConfirmed = true
                 };

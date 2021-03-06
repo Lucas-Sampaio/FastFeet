@@ -1,4 +1,5 @@
 ﻿using FastFeet.Identity.API.DAL;
+using FastFeet.Identity.API.Entity;
 using FastFeet.Identity.API.Models;
 using FastFeet.WebApi.Core.Identidade;
 using Microsoft.AspNetCore.Identity;
@@ -16,13 +17,13 @@ namespace FastFeet.Identity.API.Services
 {
     public class AuthenticationService
     {
-        public readonly SignInManager<IdentityUser> SignInManager;
-        public readonly UserManager<IdentityUser> UserManager;
+        public readonly SignInManager<User> SignInManager;
+        public readonly UserManager<User> UserManager;
         private readonly TokenConfiguration _appSettings;
 
         public AuthenticationService(
-            SignInManager<IdentityUser> signInManager,
-            UserManager<IdentityUser> userManager,
+            SignInManager<User> signInManager,
+            UserManager<User> userManager,
             IOptions<TokenConfiguration> appSettings
           )
         {
@@ -42,7 +43,7 @@ namespace FastFeet.Identity.API.Services
             return ObterRespostaToken(encodedToken, user, claims);
         }
 
-        private async Task<ClaimsIdentity> ObterClaimsUsuario(ICollection<Claim> claims, IdentityUser user)
+        private async Task<ClaimsIdentity> ObterClaimsUsuario(ICollection<Claim> claims, User user)
         {
             var userRoles = await UserManager.GetRolesAsync(user);
 
