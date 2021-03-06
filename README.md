@@ -38,15 +38,18 @@
 
 A aplicação que iremos dar início ao desenvolvimento a partir de agora é um app para uma transportadora fictícia, o FastFeet.
 
-Nesse primeiro desafio vamos criar algumas funcionalidades básicas que aprendemos ao longo das aulas até aqui. Esse projeto será desenvolvido aos poucos até o fim da sua jornada onde você terá uma aplicação completa envolvendo back-end, front-end e mobile, que será utilizada para a **certificação do bootcamp**, então, bora pro código!
+Nesse primeiro desafio vamos criar algumas funcionalidades básicas. Esse projeto será desenvolvido aos poucos até o fim da sua jornada onde você terá uma aplicação completa envolvendo back-end, front-end e mobile, que será utilizada para a **certificação do bootcamp**, então, bora pro código!
 
 ### **Um pouco sobre as ferramentas**
 
-Você deverá criar a aplicação do zero utilizando o [Express](https://expressjs.com/), além de precisar configurar as seguintes ferramentas:
+Você deverá criar a aplicação do zero utilizando asp net core 5.0 web api,
+Ferrammentas Utilizadas:
 
-- Sucrase + Nodemon;
-- ESLint + Prettier + EditorConfig;
+- Swagger - para documentação da api;
+- EF Core - para se relacionar com o banco de dados;
 - Sequelize (Utilize PostgreSQL ou MySQL);
+- Microsoft Identity - para criação de usuarios
+- Asp net Authentication JwtBearer - para geração de token jwt
 
 ### **Funcionalidades**
 
@@ -56,39 +59,8 @@ Abaixo estão descritas as funcionalidades que você deve adicionar em sua aplic
 
 Permita que um usuário se autentique em sua aplicação utilizando e-mail e uma senha.
 
-Crie um usuário administrador utilizando a funcionalidade de [seeds do sequelize](https://sequelize.org/master/manual/migrations.html#creating-the-first-seed), essa funcionalidade serve para criarmos registros na base de dados de forma automatizada.
+- Crie um usuário administrador;
 
-Para criar um seed utilize o comando:
-
-    yarn sequelize seed:generate --name admin-user
-
-No arquivo gerado na pasta `src/database/seeds` adicione o código referente à criação de um usuário administrador:
-
-    const bcrypt = require("bcryptjs");
-
-    module.exports = {
-      up: QueryInterface => {
-        return QueryInterface.bulkInsert(
-          "users",
-          [
-            {
-              name: "Distribuidora FastFeet",
-              email: "admin@fastfeet.com",
-              password_hash: bcrypt.hashSync("123456", 8),
-              created_at: new Date(),
-              updated_at: new Date()
-            }
-          ],
-          {}
-        );
-      },
-
-      down: () => {}
-    };
-
-Agora execute:
-
-    yarn sequelize db:seed:all
 
 Agora você tem um usuário na sua base de dados, utilize esse usuário para todos os logins que você fizer.
 
@@ -105,14 +77,7 @@ O cadastro de destinatários só pode ser feito por administradores autenticados
 
 O destinatário não pode se autenticar no sistema, ou seja, não possui senha.
 
-## 📅 Entrega
-
-Esse desafio **não precisa ser entregue** e não receberá correção. Além disso, o código fonte **não está disponível** por fazer parte do **desafio final**, que será corrigido para **certificação** do bootcamp. Após concluir o desafio, adicionar esse código ao seu Github é uma boa forma de demonstrar seus conhecimentos para oportunidades futuras.
-
 ## :memo: Licença
 
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
 
----
-
-Feito com ♥ by Rocketseat :wave: [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
