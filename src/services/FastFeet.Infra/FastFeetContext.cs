@@ -1,4 +1,5 @@
 ﻿using FastFeet.Dominio.AggregatesModel.DestinatarioAggregate;
+using FastFeet.Dominio.AggregatesModel.EntregadorAggregate;
 using FastFeet.Dominio.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,6 +16,7 @@ namespace FastFeet.Infra
             ChangeTracker.AutoDetectChangesEnabled = false;
         }
         public DbSet<Destinatario> Destinatarios { get; set; }
+        public DbSet<Entregador> Entregadores { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,6 +46,10 @@ namespace FastFeet.Infra
                 if (entityEntry.State == EntityState.Added)
                 {
                     ((Entity)entityEntry.Entity).CreatedAt = DateTime.Now;
+                }
+                if (entityEntry.State == EntityState.Modified)
+                {
+                    entityEntry.Property("CreatedAt").IsModified = false;
                 }
             }
 
