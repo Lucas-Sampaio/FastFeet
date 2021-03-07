@@ -54,5 +54,47 @@ namespace FastFeet.API.Controllers
             _encomendaRepository.UnitOfWork.Commit();
             return CustomResponse(null, StatusCodes.Status204NoContent);
         }
+        [HttpPut("retirar")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RetirarEncomenda(RetirarEncomendaCommand command)
+        {
+            var response = await _mediator.EnviarComando(command);
+            if (!response.IsValid) return CustomResponse(response);
+            return CustomResponse(response, StatusCodes.Status204NoContent);
+        }
+        [HttpPut("finalizar")]
+        [AllowAnonymous]
+        public async Task<IActionResult> FinalizarEncomenda(FinalizarEncomendaCommand command)
+        {
+            var response = await _mediator.EnviarComando(command);
+            if (!response.IsValid) return CustomResponse(response);
+            return CustomResponse(response, StatusCodes.Status204NoContent);
+        }
+
+        [HttpGet("{id}/problemas")]
+        [AllowAnonymous]
+        public IActionResult Problemas(int id)
+        {
+            var encomenda = _encomendaRepository.ObterPorId(id, "Problemas");
+            if (encomenda == null) NotFound("Encomenda não encontrado");
+
+            var problemas = encomenda.Problemas;
+            return CustomResponse(problemas, StatusCodes.Status200OK);
+        }
+
+        [HttpPost("{id}/problemas")]
+        [AllowAnonymous]
+        public IActionResult AddProblemas(int id, [FromBody] string descricao)
+        {
+            var encomenda = _encomendaRepository.ObterPorId(id);
+            if (encomenda == null) NotFound("Encomenda não encontrado");
+            if (string.IsNullOrWhiteSpace(descricao)) AdicionarErroProcessamento("Informe Problema");
+
+            var problema = new EncomedaProblemas(descricao, id);
+            _encomendaRepository.AdicionarProblema(problema);
+            _encomendaRepository.UnitOfWork.Commit();
+
+            return CustomResponse(null, StatusCodes.Status200OK);
+        }
     }
 }

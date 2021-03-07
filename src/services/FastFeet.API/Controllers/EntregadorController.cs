@@ -51,5 +51,14 @@ namespace FastFeet.API.Controllers
             _entregadorRepository.UnitOfWork.Commit();
             return CustomResponse(null, StatusCodes.Status204NoContent);
         }
+
+        [HttpGet("{id}/entregas")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Entregas(int id)
+        {
+            var response = await _entregadorRepository.ObterEntregasDisponiveis(id);
+            return CustomResponse(response, StatusCodes.Status200OK);
+        }
+
     }
 }

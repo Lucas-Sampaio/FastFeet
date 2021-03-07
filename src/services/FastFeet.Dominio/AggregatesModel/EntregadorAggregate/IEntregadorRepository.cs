@@ -1,4 +1,5 @@
-﻿using FastFeet.Dominio.SeedWork;
+﻿using FastFeet.Dominio.AggregatesModel.EncomendasAggregate;
+using FastFeet.Dominio.SeedWork;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -14,5 +15,7 @@ namespace FastFeet.Dominio.AggregatesModel.EntregadorAggregate
         void Atualizar(Entregador entregador);
         void Remover(Entregador entregador); 
         Task<bool> Existe(Expression<Func<Entregador, bool>> expression);
+        Task<ICollection<Encomenda>> ObterEntregasDisponiveis(int entregadorId);
+        int ContarRetiradasNoDia(int entregadorId);
     }
 }

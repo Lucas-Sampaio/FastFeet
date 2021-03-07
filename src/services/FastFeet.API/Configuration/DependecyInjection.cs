@@ -26,6 +26,8 @@ namespace FastFeet.API.Configuration
             services.AddScoped<IRequestHandler<AtualizarEntregadorCommand, ValidationResult>, EntregadorCommandHandler>();
             services.AddScoped<IRequestHandler<CadastrarEncomendaCommand, ValidationResult>, EncomendaHandler>();
             services.AddScoped<IRequestHandler<AtualizarEncomendaCommand, ValidationResult>, EncomendaHandler>();
+            services.AddScoped<IRequestHandler<RetirarEncomendaCommand, ValidationResult>, EncomendaHandler>();
+            services.AddScoped<IRequestHandler<FinalizarEncomendaCommand, ValidationResult>, EncomendaHandler>();
             //data
             services.AddScoped<IDestinatarioRepository, DestinatarioRepository>();
             services.AddScoped<IEntregadorRepository, EntregadorRepository>();

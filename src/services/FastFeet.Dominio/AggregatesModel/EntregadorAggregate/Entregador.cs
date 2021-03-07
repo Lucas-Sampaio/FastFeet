@@ -4,6 +4,7 @@ namespace FastFeet.Dominio.AggregatesModel.EntregadorAggregate
 {
     public class Entregador : Entity, IAggregateRoot
     {
+        public const int  limiteRetirada = 5;
         protected Entregador() { }
         public Entregador(string nome, string email)
         {
