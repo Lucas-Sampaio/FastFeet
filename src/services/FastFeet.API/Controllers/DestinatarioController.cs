@@ -21,13 +21,13 @@ namespace FastFeet.API.Controllers
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> AdicionarDestinatario(CadastrarDestinatarioCommand destinatarioCommand)
+        public async Task<IActionResult> Post(CadastrarDestinatarioCommand destinatarioCommand)
         {
             var response = await _mediator.EnviarComando(destinatarioCommand);
             return CustomResponse(response,StatusCodes.Status201Created);
         }
         [HttpPut("")]
-        public async Task<IActionResult> AtualizarDestinatario(AtualizarDestinatarioCommand destinatarioCommand)
+        public async Task<IActionResult> Put(AtualizarDestinatarioCommand destinatarioCommand)
         {
             var response = await _mediator.EnviarComando(destinatarioCommand);
             return CustomResponse(response, StatusCodes.Status204NoContent);
