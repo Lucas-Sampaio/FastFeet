@@ -1,8 +1,10 @@
-﻿using FastFeet.Dominio.AggregatesModel.EntregadorAggregate;
+﻿using FastFeet.Dominio.AggregatesModel.EncomendasAggregate;
+using FastFeet.Dominio.AggregatesModel.EntregadorAggregate;
 using FastFeet.Dominio.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -28,6 +30,11 @@ namespace FastFeet.Infra.Repositories
             return entidade;
         }
 
+        public int ContarRetiradasNoDia(int id)
+        {
+          return  _context.Encomendas.Count(x => x.EntregadorId == id && x.DataInicio != null && x.DataInicio == DateTime.Today);
+        }
+
         public void Dispose()
         {
             _context.Dispose();
@@ -38,9 +45,16 @@ namespace FastFeet.Infra.Repositories
             return await _context.Entregadores.AnyAsync(expression);
         }
 
+        public async Task<ICollection<Encomenda>> ObterEntregasDisponiveis(int entregadorId)
+        {
+            var encomendas = _context.Encomendas
+                .Where(x => x.EntregadorId == entregadorId && x.CanceledAt == null && x.DataFinal == null);
+            return await encomendas.ToListAsync();
+        }
+
         public Entregador ObterPorId(int id)
         {
-            return  _context.Entregadores.Find(id);
+            return _context.Entregadores.Find(id);
         }
 
         public async Task<ICollection<Entregador>> ObterTodos()

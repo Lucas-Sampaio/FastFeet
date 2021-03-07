@@ -19,6 +19,7 @@ namespace FastFeet.Infra
         public DbSet<Destinatario> Destinatarios { get; set; }
         public DbSet<Entregador> Entregadores { get; set; }
         public DbSet<Encomenda> Encomendas { get; set; }
+        public DbSet<EncomedaProblemas> EncomedaProblemas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

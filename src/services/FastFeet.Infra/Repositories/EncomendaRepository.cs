@@ -1,7 +1,9 @@
 ﻿using FastFeet.Dominio.AggregatesModel.EncomendasAggregate;
 using FastFeet.Dominio.SeedWork;
+using FastFeet.Infra.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FastFeet.Infra.Repositories
@@ -16,6 +18,11 @@ namespace FastFeet.Infra.Repositories
         }
 
         public IUnitOfWork UnitOfWork => _context;
+
+        public void AdicionarProblema(EncomedaProblemas encomedaProblema)
+        {
+            _context.EncomedaProblemas.Add(encomedaProblema);
+        }
 
         public void Atualizar(Encomenda encomenda)
         {
@@ -33,9 +40,9 @@ namespace FastFeet.Infra.Repositories
             _context.Dispose();
         }
 
-        public Encomenda ObterPorId(int id)
+        public Encomenda ObterPorId(int id, params string[] includeProperties)
         {
-            return _context.Encomendas.Find(id);
+            return _context.Encomendas.IncludeProp(includeProperties).SingleOrDefault(x => x.Id == id);
         }
 
         public async Task<ICollection<Encomenda>> ObterTodos()

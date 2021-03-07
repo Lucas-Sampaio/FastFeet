@@ -21,6 +21,7 @@ namespace FastFeet.Infra.EntityConfigurations
             builder.Property(x => x.DestinatarioId).IsRequired();
             builder.HasOne(x => x.Entregador).WithMany().HasForeignKey(x => x.EntregadorId).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(x => x.Destinatario).WithMany().HasForeignKey(x => x.DestinatarioId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(x => x.Problemas).WithOne().HasForeignKey(x => x.EncomendaId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
