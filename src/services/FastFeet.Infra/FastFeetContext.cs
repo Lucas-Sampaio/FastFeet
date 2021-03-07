@@ -1,4 +1,5 @@
 ﻿using FastFeet.Dominio.AggregatesModel.DestinatarioAggregate;
+using FastFeet.Dominio.AggregatesModel.EncomendasAggregate;
 using FastFeet.Dominio.AggregatesModel.EntregadorAggregate;
 using FastFeet.Dominio.SeedWork;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,7 @@ namespace FastFeet.Infra
         }
         public DbSet<Destinatario> Destinatarios { get; set; }
         public DbSet<Entregador> Entregadores { get; set; }
+        public DbSet<Encomenda> Encomendas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

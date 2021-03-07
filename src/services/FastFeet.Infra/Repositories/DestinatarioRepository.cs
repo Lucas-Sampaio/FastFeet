@@ -1,5 +1,9 @@
 ﻿using FastFeet.Dominio.AggregatesModel.DestinatarioAggregate;
 using FastFeet.Dominio.SeedWork;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace FastFeet.Infra.Repositories
 {
@@ -27,6 +31,11 @@ namespace FastFeet.Infra.Repositories
         public void Dispose()
         {
             _context.Dispose();
+        }
+
+        public async Task<bool> Existe(Expression<Func<Destinatario, bool>> expression)
+        {
+            return await _context.Destinatarios.AnyAsync(expression);
         }
     }
 }

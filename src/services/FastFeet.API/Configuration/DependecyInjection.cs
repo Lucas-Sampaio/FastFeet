@@ -1,7 +1,9 @@
 ﻿using FastFeet.API.Application.Commands.DestinatarioCommands;
+using FastFeet.API.Application.Commands.EncomendaCommands;
 using FastFeet.API.Application.Commands.EntregadorCommands;
 using FastFeet.API.Mediator;
 using FastFeet.Dominio.AggregatesModel.DestinatarioAggregate;
+using FastFeet.Dominio.AggregatesModel.EncomendasAggregate;
 using FastFeet.Dominio.AggregatesModel.EntregadorAggregate;
 using FastFeet.Infra.Repositories;
 using FluentValidation.Results;
@@ -22,9 +24,12 @@ namespace FastFeet.API.Configuration
             services.AddScoped<IRequestHandler<AtualizarDestinatarioCommand, ValidationResult>, DestinatarioCommandHandler>();
             services.AddScoped<IRequestHandler<CadastrarEntregadorCommand, ValidationResult>, EntregadorCommandHandler>();
             services.AddScoped<IRequestHandler<AtualizarEntregadorCommand, ValidationResult>, EntregadorCommandHandler>();
+            services.AddScoped<IRequestHandler<CadastrarEncomendaCommand, ValidationResult>, EncomendaHandler>();
+            services.AddScoped<IRequestHandler<AtualizarEncomendaCommand, ValidationResult>, EncomendaHandler>();
             //data
             services.AddScoped<IDestinatarioRepository, DestinatarioRepository>();
             services.AddScoped<IEntregadorRepository, EntregadorRepository>();
+            services.AddScoped<IEncomendaRepository, EncomendaRepository>();
 
         }
     }
